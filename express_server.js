@@ -54,6 +54,13 @@ app.get("/u/:id", (req, res) => {
   }
 });
 
+// Updated route for deleting URLs
+app.post("/urls/:id/delete", (req, res) => {
+  const shortURL = req.params.id;
+  delete urlDatabase[shortURL];
+  res.redirect("/urls");
+});
+
 app.post("/urls", (req, res) => {
   console.log(req.body); // Log the POST request body to the console
   const shortURL = generateRandomString(6);
