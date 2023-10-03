@@ -36,14 +36,29 @@ app.get("/urls/new", (req, res) => {
   res.render("urls_new");
 });
 
+// Updated route for /urls/:id
 app.get("/urls/:id", (req, res) => {
-  const templateVars = { id: req.params.id, longURL: 'http://localhost:8080/urls/b2xVn2' };
+  const templateVars = { id: req.params.id, longURL: urlDatabase[req.params.id] };
   res.render("urls_show", templateVars);
+});
+
+// Handle short URL redirection
+app.get("/u/:id", (req, res) => {
+  const shortURL = req.params.id;
+  const longURL = urlDatabase[shortURL];
+  
+  if (longURL) {
+    res.redirect(longURL);
+  } else {
+    res.status(404).send("Short URL not found");
+  }
 });
 
 app.post("/urls", (req, res) => {
   console.log(req.body); // Log the POST request body to the console
-  res.send("Ok"); // Respond with 'Ok' (we will replace this)
+  const shortURL = generateRandomString(6);
+  urlDatabase[shortURL] = req.body.longURL;
+  res.redirect(`/urls/${shortURL}`); // Redirect to the show page for the newly created URL
 });
 
 function generateRandomString(length) {
@@ -57,4 +72,3 @@ function generateRandomString(length) {
 
   return randomString;
 }
-
