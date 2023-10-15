@@ -91,7 +91,7 @@ app.get("/urls/new", (req, res) => {
 //edit / show tiny url
 app.get("/urls/:shortURL", (req, res) => {
   if (!req.session["userID"]) {
-    res.status(400).send("400 error ! Please Login or Register");
+    res.status(400).send("400 error! Please Login or Register");
   } else if (!urlDatabase[req.params.shortURL]) {
     res.status(404).send("404 not found! This URL doesn't exist");
   } else if (urlDatabase[req.params.shortURL].userID === req.session["userID"]) {
@@ -102,9 +102,9 @@ app.get("/urls/:shortURL", (req, res) => {
     };
     res.render("urls_show", templateVars);
   } else if (urlDatabase[req.params.shortURL].userID !== req.session["userID"]) {
-    res.status(403).send("403 error ! This is not your URL");
+    res.status(403).send("403 error! This is not your URL");
   } else {
-    res.status(400).send("400 error ! Please Login");
+    res.status(400).send("400 error! Please Login");
   }
 });
 
@@ -129,7 +129,7 @@ app.post("/register", (req, res) => {
     req.session["userID"] = newUserID;
     res.redirect("/urls");
   } else {
-    res.status(400).send("400 error ! Please Login");
+    res.status(400).send("400 error! Email already exists");
   }
 });
 
@@ -145,7 +145,7 @@ app.post("/urls/:id", (req, res) => {
   }
 });
 
-//generate random shurt url + add to database
+//generate random short url + add to database
 app.post("/urls", (req, res) => {
   const longURL = req.body.longURL;
   const userID = req.session["userID"];
