@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <%- include('partial/_header.ejs') %>
+  <%- include('partials/_header.ejs') %>
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
   <!-- Bootstrap CSS -->
@@ -11,8 +11,8 @@
 </head>
 <body>
   <main style="margin: 1em;">
-    <h3>Create Account</h3>
-    <form action="/register" method="POST">
+    <h3>Login</h3>
+    <form action="/login" method="POST">
       <div>
         <label for="email"> Email </label>
         <input type="email" name="email">
@@ -20,7 +20,7 @@
       <div>
         <label for="password"> Password </label>
         <input type="password"  name="password">
-        <button type="submit"> Register </button>
+        <button type="submit"> Login </button>
       </div>
     </form>
   </main>
